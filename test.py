@@ -1,4 +1,7 @@
-import random
+import copy
 
-for i in range(50):
-    print(random.randint(1,3))
+a = [1]
+b = copy.deepcopy(a)
+b.append(2)
+print(a)
+print(b)

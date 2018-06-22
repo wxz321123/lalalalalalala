@@ -28,9 +28,17 @@ def load_node_info(path):
     for c in charging:
         c.set_polar(warehouse.lng, warehouse.lat)
 
+    id_type_map = {}
 
+    id_type_map[warehouse.id] = warehouse.type
 
-    return warehouse, orders, charging
+    for o in orders:
+        id_type_map[o.id] = o.type
+
+    for c in charging:
+        id_type_map[c.id] = c.type
+
+    return warehouse, orders, charging, id_type_map
 
 def load_vehicle_info(path):
     print("loading vehicle information")
