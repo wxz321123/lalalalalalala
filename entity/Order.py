@@ -8,8 +8,14 @@ class Order(object):
         self.type = type
         self.lng = lng
         self.lat = lat
-        self.weight = weight
-        self.volume = volume
+        if (weight == '-'):
+            self.weight = -1
+        else:
+            self.weight = float(weight)
+        if (volume == '-'):
+            self.volume = -1
+        else:
+            self.volume = float(volume)
         self.fst_time = fst_time
         self.lst_time = lst_time
 

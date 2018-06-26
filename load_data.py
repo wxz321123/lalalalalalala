@@ -46,7 +46,7 @@ def load_vehicle_info(path):
     vdf = pd.read_csv(path)
     for idx in vdf.index:
         row = vdf.loc[idx]
-        v = Vehicle(id=row['vehicle_type_ID'], name=row['vehicle_type_name'], weight=row['max_weight'], volume=['max_volume'],
+        v = Vehicle(id=row['vehicle_type_ID'], name=row['vehicle_type_name'], weight=row['max_weight'], volume=row['max_volume'],
                     driving_range=row['driving_range'], charge_time=row['charge_tm'], unit_cost=row['unit_trans_cost'], day_cost=row['vehicle_cost'])
         vehicles.append(v)
     return vehicles
