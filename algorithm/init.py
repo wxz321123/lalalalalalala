@@ -2,6 +2,7 @@ import random
 import utils
 from copy import deepcopy
 import datetime
+from entity.TransportPath import TransportPath
 
 def polar_cmp(x, y):
     if (x.polar_angle != y.polar_angle):
@@ -133,6 +134,8 @@ def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_
     pass
 
 def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
+
+
     distance_thres = 10000
     num_vehicle_type = len(vehicle_info)
 
@@ -142,12 +145,13 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
     start_idx = random.randint(0, len(angle_sorted_orders) - 1)
     part1 = angle_sorted_orders[start_idx:len(angle_sorted_orders)]
     part2 = angle_sorted_orders[0:start_idx - 1]
-    angle_sorted_orders = part2 + part1
+    angle_sorted_orders = part1 + part2
 
     used = [0] * len(angle_sorted_orders)
     num_considered_order = 0
 
     while(num_considered_order < len(angle_sorted_orders)):
+        used_try = deepcopy(used)
         random_v_type = random.randint(0, len(vehicle_info) - 1)
         path = []
 
@@ -157,9 +161,9 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
         cur_volume = 0
 
         # 这一条路径从这里开始
-        path_starting_idx = first_unused_idx(used)
+        path_starting_idx = first_unused_idx(used_try)
         path.append(angle_sorted_orders[path_starting_idx].id)
-        used[path_starting_idx] = 1
+        used_try[path_starting_idx] = 1
         num_considered_order += 1
         cur_weight += angle_sorted_orders[path_starting_idx].weight
         cur_volume += angle_sorted_orders[path_starting_idx].volume
@@ -170,11 +174,12 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
         for idx in candidate_idxs_in_anlge_sorted_orders:
             candidate.append(angle_sorted_orders[idx])
 
+        # used2 和 used 信息是相同的，只是保存的数目不同，目的是方便检索
         used2 = []
         num_considered_order2 = 0
         for idx in candidate_idxs_in_anlge_sorted_orders:
-            used2.append(used[idx])
-            if (used[idx] == 1):
+            used2.append(used_try[idx])
+            if (used_try[idx] == 1):
                 num_considered_order2 += 1
 
         while (num_considered_order2 < len(candidate)):
@@ -191,7 +196,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     path.append(candidate[random_idx].id)
                     cur_weight += candidate[random_idx].weight
                     cur_volume += candidate[random_idx].volume
-                    used[candidate_idxs_in_anlge_sorted_orders[random_idx]] = 1
+                    used_try[candidate_idxs_in_anlge_sorted_orders[random_idx]] = 1
                     used2[random_idx] = 1
                     num_considered_order += 1
                     num_considered_order2 += 1
@@ -221,6 +226,9 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                         break
 
         if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)):
-            individual.append(path)
+            used = used_try
+            tp = TransportPath(path, vehicle_info[random_v_type].id)
+            tp.calc_path_info(distance_matrix, time_matrix, vehicle_info)
+            individual.append(tp)
 
     return individual

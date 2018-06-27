@@ -2,8 +2,9 @@ import load_data as ldd
 import copy
 import algorithm.init as ai
 import random
+import time
 
-random.seed(0)
+random.seed(time.time())
 
 warehouse, orders, charging, id_type_map = ldd.load_node_info("data/input_node.csv")
 
@@ -19,7 +20,7 @@ for o in orders:
 
 print("generation initial population")
 init_population = []
-INIT_POPULATION_SIZE = 50
+INIT_POPULATION_SIZE = 2
 
 for i in range(INIT_POPULATION_SIZE):
     init_population.append(ai.random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging, vehicles, id_type_map, distance_matrix, time_matrix))
