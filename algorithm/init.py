@@ -38,26 +38,16 @@ def if_go_to_charge(path, vehicle, id_type_map, distance_matrix, thres_percent):
         return False
     else:
         return True
-# 计算一段路径的运输距离
-def path_mileage(path, distance_matrix):
-    path_mile = 0
-    path_mile += distance_matrix[0][path[0]]
-    for idx in range(len(path)-1):
-        path_mile += distance_matrix[path[idx]][path[idx+1]]
-    path_mile += distance_matrix[path[len(path)-1]][0]
-    return path_mile
 
 def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_map):
-    start_time = datetime.datetime(2018, 6, 18, 8, 0, 0)
-    back_tm = datetime.datetime(2018, 6, 18, 8, 0, 0)
-    tp = TransportPath(path,vehicles,0,start_time,back_tm,0,0,0)
-    wating_time =0
-    mVehicle = {'weight': 0, 'volume': 0, 'charge_mile': 0, 'current_time': 0,'mileage': 0}  # current_time 预定义这个时间为开始工作时间
+    charge_position_id = []
+    wating_time =[]
     for node_idx in range(len(path)):
-        print(path[node_idx])
-        if id_type_map[path[node_idx]] == 2:
-        #对应序列号是否为0，也就是不是第一个 配送客户的情况下
-            t_order = orders[path[node_idx]-1] #id对应的客户，可以该代码使更直观,.__dict__ 可以看到这个对象的结构
+        print(node_idx)
+        #先制定从配送站出发到达的第一个客户的情况
+        if node_idx == 0:
+            t_order = orders[path[node_idx]-1]#id对应的客户，可以该代码使更直观,.__dict__ 可以看到这个对象的结构
+            mVehicle ={'weight':0,'volume':0,'charge_mile':0,'current_time':0,'mileage':0} # current_time 预定义这个时间为开始工作时间
             #记录当前车辆载重，并于核定载重比较
             mVehicle["weight"] = mVehicle["weight"]+ float(t_order.weight)
             if mVehicle["weight"] < vehicles[1].weight:
@@ -67,59 +57,17 @@ def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_
                 if mVehicle["volume"] < vehicles[1].volume:
                     print("容量够")
                     #记录当前的充电后行驶里程，并与持续里程比较
-                    # 把判断是否是被配送的第一个点放在这里。
-                    if node_idx == 0:
-                        mVehicle["charge_mile"] = distance_matrix[0][path[node_idx]]
-                    else:
-                        mVehicle["charge_mile"] = mVehicle["charge_mile"] + distance_matrix[path[node_idx-1]][path[node_idx]]
+                    mVehicle["charge_mile"] = distance_matrix[0][path[0]]
                     print(mVehicle["charge_mile"])
-                    ####------临时测试用，之后要改成第二种车型
                     if mVehicle["charge_mile"] < vehicles[1].driving_range:
-                        print("电量够到这个点")
+                        print("电量够")
                         #记录当前的时间，未明确离开时间
-                        if node_idx == 0:  #如果是从配送站出发到达的第一个点
-                            trans_time = time_matrix[0][path[node_idx]]
-                            mVehicle["current_time"] = datetime.datetime(2018, 6, 18, 8, 0, 0) + datetime.timedelta(minutes=trans_time) #30分钟是客户服务时间
-                        else:
-                            trans_time = time_matrix[path[node_idx-1]][path[node_idx]] #两个节点之间的运输时间
-                            mVehicle["current_time"] = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time+30) #30分钟是前一个客户服务时间
-                        # datetime.timedelta(hours=10,minutes=30)  #时间运算/时间加减
+                        mVehicle["current_time"] = datetime.datetime(2018,6,18,int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]),0)
+                        # 还是应该计算行路时间取最小
                         print(mVehicle["current_time"])
-                        if mVehicle["current_time"] < datetime.datetime(2018,6,18,int(t_order.lst_time.split(":")[0]),int(t_order.lst_time.split(":")[1]),0):
-                            print("满足时间窗上限",t_order.fst_time,t_order.lst_time)
-                            if mVehicle["current_time"] < datetime.datetime(2018,6,18,int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]),0):
-                                if node_idx != 0: #配送站出发没有等待时间
-                                    wating_time = wating_time + (datetime.datetime(2018, 6, 18, int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]), 0) -mVehicle["current_time"]).seconds / 60
-                                    print("配送站等待时间", wating_time)
-                                if node_idx==0: #判断汽车从配送站出发的时间
-                                    t_time = (datetime.datetime(2018, 6, 18, int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]), 0) -mVehicle["current_time"]).seconds/60
-                                    tp.start_tm = datetime.datetime(2018, 6, 18, 8, 0, 0) + datetime.timedelta(minutes=t_time)
-                                mVehicle["current_time"] = datetime.datetime(2018, 6, 18,int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]), 0)
-                                # 如果比服务时间下限小，就将服务时间下限作为服务时间，否则就是到达时间
-                            # 判断能否回到充电站
-                            mVehicle["charge_mile"] = mVehicle["charge_mile"] + distance_matrix[path[node_idx - 1]][path[node_idx]]
-                            if mVehicle["charge_mile"] < vehicles[1].driving_range:
-                                print("不充电就直接回到配送站")
-                                trans_time = time_matrix[path[node_idx]][0]  # 两个节点之间的运输时间
-                                tp.back_tm = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time + 30)  # 30分钟是前一个客户服务时间
-                            else:
-                                print("为了回家去充电")
-                                #判断不充电回不了配送站的情况下，可不可以到附近的充电站充电
-                                if mVehicle["charge_mile"] + t_order.charging_dist < vehicles[1].driving_range:
-                                    print("为了回家可以去充电")
-                                    trans_time =time_matrix[path[node_idx]][t_order.charging_binding]+ time_matrix[t_order.charging_binding][0]  # 两个节点之间的运输时间
-                                    tp.back_tm = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time + 30)  # 30分钟是前一个客户服务时间
-
-                                else:
-                                    print("不充电回不了配送站，而且去不了就近的充电站")
-                                    return False
-                        else:
-                            print("超时无法服务客户")
-                            return False
-
                     else:
                         # 车的电量不够，要去充电
-                        print("车的电量不够")
+                        print("车的电量不够，要去充电")
                         return False
                 else:
                     print("车辆容积不够")
@@ -127,23 +75,62 @@ def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_
             else:
                 print("车辆载重不够")
                 return False
+        #对应序列号是否为0，也就是不是第一个 配送客户的情况下
         else:
-            # 判断到最近的充电站够不够
-            if mVehicle["charge_mile"] + t_order.charging_dist < vehicles[1].driving_range:
-                # 充电会影响充电行驶里程，还有行驶总路程，还有时间
-                mVehicle["charge_mile"] = distance_matrix[t_order.charging_binding][path[node_idx]]
-                trans_time_withCharge = time_matrix[path[node_idx - 1]][t_order.charging_binding] + time_matrix[t_order.charging_binding][path[node_idx]]  # t_order.char 经过充电站后到下一个客户的时间
-                mVehicle["current_time"] = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time_withCharge + 30)  # 30分钟是客户服务时间
-                # charge_position_id.append(node_idx)
-            else:
-                # 如果电量不够去充电
-                print("电量不够去充电")
-                return False
+            if id_type_map[path[node_idx]] == 2:
+                t_order = orders[path[node_idx]-1]#id对应的客户，可以该代码使更直观,.__dict__ 可以看到这个对象的结构
+                #记录当前车辆载重，并于核定载重比较
+                mVehicle["weight"] = mVehicle["weight"]+ float(t_order.weight)
+                if mVehicle["weight"] < vehicles[1].weight:
+                    print("载重够")
+                    #记录当前车辆的容积，并与核定容积比较
+                    mVehicle["volume"] = mVehicle["volume"] + float(t_order.volume)
+                    if mVehicle["volume"] < vehicles[1].volume:
+                        print("容量够")
+                        #记录当前的充电后行驶里程，并与持续里程比较
+                        mVehicle["charge_mile"] = mVehicle["charge_mile"] + distance_matrix[path[node_idx-1]][path[node_idx]]
+                        print(mVehicle["charge_mile"])
+                        ####------临时测试用，之后要改成第二种车型
+                        if mVehicle["charge_mile"] < vehicles[1].driving_range:
+                            print("电量够")
+                            #记录当前的时间，未明确离开时间
+                            trans_time = time_matrix[path[node_idx-1]][path[node_idx]] #两个节点之间的运输时间
+                            mVehicle["current_time"] = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time+30) #30分钟是客户服务时间
+                            # datetime.timedelta(hours=10,minutes=30)  #时间运算/时间加减
+                            print(mVehicle["current_time"])
+                            if mVehicle["current_time"] < datetime.datetime(2018,6,18,int(t_order.lst_time.split(":")[0]),int(t_order.lst_time.split(":")[1]),0):
+                                print("满足时间窗上限",t_order.lst_time)
+                                if mVehicle["current_time"] < datetime.datetime(2018,6,18,int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]),0):
+                                    mVehicle["current_time"] = datetime.datetime(2018,6,18,int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]),0)
+                                    #如果比服务时间下限小，就将服务时间下限作为服务时间，否则就是到达时间
+                            else:
+                                print("超时无法服务客户")
+                                return False
 
-    # tp = TransportPath(path,vehicles,0,0,0)
-    tp.weight = mVehicle["weight"]
-    tp.wating_tm = wating_time
-    return True,tp
+                        else:
+                            # 车的电量不够，要去充电
+                            print("车的电量不够，要去充电")
+                            return False
+                    else:
+                        print("车辆容积不够")
+                        return False
+                else:
+                    print("车辆载重不够")
+                    return False
+            else:
+                # 判断到最近的充电站够不够
+                if mVehicle["charge_mile"] + t_order.charging_dist < vehicles[1].driving_range:
+                    # 充电会影响充电行驶里程，还有行驶总路程，还有时间
+                    mVehicle["charge_mile"] = distance_matrix[t_order.charging_binding][path[node_idx]]
+                    trans_time_withCharge = time_matrix[path[node_idx - 1]][t_order.charging_binding] + time_matrix[t_order.charging_binding][path[node_idx]]  # t_order.char 经过充电站后到下一个客户的时间
+                    mVehicle["current_time"] = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time_withCharge + 30)  # 30分钟是客户服务时间
+                    # charge_position_id.append(node_idx)
+                else:
+                    # 如果电量不够去充电
+                    print("电量不够去充电")
+                    return False
+    # return charge_position_id
+    return True
     pass
 
 def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
@@ -167,7 +154,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
         used_try = deepcopy(used)
         random_v_type = random.randint(0, len(vehicle_info) - 1)
         path = []
-        cost_charge = 0  # 充电成本默认为0
+
         max_weight = vehicle_info[random_v_type].weight
         max_volume = vehicle_info[random_v_type].volume
         cur_weight = 0
@@ -234,22 +221,14 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     if (can_go_charge):
                         # 电够就去
                         path.append(id_sorted_orders[path[-1] - 1].charging_binding)
-                        cost_charge += 50 #充电后充电成本为
                     else:
                         # 电不够，挂掉
                         break
 
         if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)):
             used = used_try
-            #刘治修改
-            tp = if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)[1]
-            tp.charge_cost = cost_charge
+            tp = TransportPath(path, vehicle_info[random_v_type].id)
             tp.calc_path_info(distance_matrix, time_matrix, vehicle_info)
-            tp.distance = path_mileage(path, distance_matrix)
-            #总成本=运输成本+等待成本+充电成本+固定成本
-            tp.trans_cost = tp.distance * 0.014
-            tp.wait_cost = tp.wating_tm * 24
-            tp.total_cost = tp.trans_cost  + tp.wait_cost + tp.charge_cost + 300
             individual.append(tp)
 
     return individual
