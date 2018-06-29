@@ -3,7 +3,7 @@ import copy
 import algorithm.init as ai
 import random
 import time
-import xlwt
+import pandas as pd
 
 random.seed(time.time())
 
@@ -21,18 +21,15 @@ for o in orders:
 
 print("generation initial population")
 init_population = []
-INIT_POPULATION_SIZE = 2
+INIT_POPULATION_SIZE = 10
 
 for i in range(INIT_POPULATION_SIZE):
     init_population.append(ai.random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging, vehicles, id_type_map, distance_matrix, time_matrix))
 
-f = xlwt.Workbook()  # 创建工作簿
-for idx in range(INIT_POPULATION_SIZE):
-    sheet1 = f.add_sheet(str(idx), cell_overwrite_ok=True)  # 创建sheet
-    obj = init_population[idx]
-    # tp_feature = ["path", "vehicle_id", "wating_tm", "start_tm", "back_tm", "distance", "charge_cost", "weight"]
-    for i in range(len(obj)):
-        sheet1.write(i,0, str(obj[i].total_cost))  # 表格的第一行开始写。第一列，第二列。。。。
-        # sheet1.write(0,0,start_date,set_style('Times New Roman',220,True))
-f.save('text3.xls')  # 保存文件
+    print(init_population[i])
+    init_pop_pd = pd.DataFrame(init_population[i])
+    init_pop_pd.rename(columns={0:"path", 1:'weight',2:'start_tm',3:'back_tm',4:'distance',5:'trans_cost',6:'wating_tm',7:'wait_cost',8:'charge_cost', 9:'total_cost'}, inplace=True)
+    # print(init_pop_pd)
+    ldd.excelAddSheet(init_pop_pd,'excel_output.xlsx','sheet'+str(i+1))
+
 print("done")

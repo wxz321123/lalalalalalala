@@ -50,7 +50,7 @@ def path_mileage(path, distance_matrix):
 def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_map):
     start_time = datetime.datetime(2018, 6, 18, 8, 0, 0)
     back_tm = datetime.datetime(2018, 6, 18, 8, 0, 0)
-    tp = TransportPath(path,vehicles,0,start_time,back_tm,0,0,0)
+    tp = TransportPath(path,vehicles,0,start_time,back_tm,0,0,0,0,0,0)
     wating_time =0
     mVehicle = {'weight': 0, 'volume': 0, 'charge_mile': 0, 'current_time': 0,'mileage': 0}  # current_time 预定义这个时间为开始工作时间
     for node_idx in range(len(path)):
@@ -248,8 +248,8 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
             tp.distance = path_mileage(path, distance_matrix)
             #总成本=运输成本+等待成本+充电成本+固定成本
             tp.trans_cost = tp.distance * 0.014
-            tp.wait_cost = tp.wating_tm * 24
+            tp.wait_cost = tp.wating_tm / 60 * 24
             tp.total_cost = tp.trans_cost  + tp.wait_cost + tp.charge_cost + 300
-            individual.append(tp)
+            individual.append(tp.to_list())
 
     return individual

@@ -1,6 +1,8 @@
 import pandas as pd
 from entity.Order import Order
 from entity.Vehicle import Vehicle
+from openpyxl import load_workbook
+import os
 
 def load_node_info(path):
     print('loading node information')
@@ -80,3 +82,14 @@ def load_distance_time_info(path):
                 time_matrix[i][j] = time_series[base + j - 1]
 
     return dist_matrix, time_matrix
+# 将解以EXCEL的形式输出
+def excelAddSheet(dataframe, outfile, name):
+    writer = pd.ExcelWriter(outfile, engine='openpyxl')
+    if os.path.exists(outfile) != True:
+        dataframe.to_excel(writer, name, index=None)
+    else:
+        book = load_workbook(writer.path)
+        writer.book = book
+        dataframe.to_excel(excel_writer=writer, sheet_name = name, index=None)
+    writer.save()
+    writer.close()
