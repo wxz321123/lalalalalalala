@@ -148,7 +148,6 @@ def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_
 
 def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
 
-
     distance_thres = 10000
     num_vehicle_type = len(vehicle_info)
 
@@ -157,7 +156,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
     #整个过程从这个点开始
     start_idx = random.randint(0, len(angle_sorted_orders) - 1)
     part1 = angle_sorted_orders[start_idx:len(angle_sorted_orders)]
-    part2 = angle_sorted_orders[0:start_idx - 1]
+    part2 = angle_sorted_orders[0:start_idx]
     angle_sorted_orders = part1 + part2
 
     used = [0] * len(angle_sorted_orders)
@@ -165,6 +164,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
 
     while(num_considered_order < len(angle_sorted_orders)):
         used_try = deepcopy(used)
+        num_considered_order_try = num_considered_order
         random_v_type = random.randint(0, len(vehicle_info) - 1)
         path = []
         cost_charge = 0  # 充电成本默认为0
@@ -177,7 +177,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
         path_starting_idx = first_unused_idx(used_try)
         path.append(angle_sorted_orders[path_starting_idx].id)
         used_try[path_starting_idx] = 1
-        num_considered_order += 1
+        num_considered_order_try += 1
         cur_weight += angle_sorted_orders[path_starting_idx].weight
         cur_volume += angle_sorted_orders[path_starting_idx].volume
 
@@ -211,7 +211,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     cur_volume += candidate[random_idx].volume
                     used_try[candidate_idxs_in_anlge_sorted_orders[random_idx]] = 1
                     used2[random_idx] = 1
-                    num_considered_order += 1
+                    num_considered_order_try += 1
                     num_considered_order2 += 1
                     break
                 else:
@@ -241,6 +241,8 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
 
         if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)):
             used = used_try
+            num_considered_order = num_considered_order_try
+
             #刘治修改
             tp = if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)[1]
             tp.charge_cost = cost_charge

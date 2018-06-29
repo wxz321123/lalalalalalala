@@ -5,7 +5,8 @@ import random
 import time
 import pandas as pd
 
-random.seed(time.time())
+#random.seed(time.time())
+random.seed(0)
 
 warehouse, orders, charging, id_type_map = ldd.load_node_info("data/input_node.csv")
 
