@@ -1,7 +1,8 @@
 import random
 from copy import deepcopy
 from algorithm.verify import if_path_legal
-
+from algorithm.verify import if_go_to_charge
+from algorithm.verify import path_time_info
 
 def polar_cmp(x, y):
     if (x.polar_angle != y.polar_angle):
@@ -26,40 +27,27 @@ def first_unused_idx(used):
             return i
     return -1
 
-
-def if_go_to_charge(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map):
-    if (len(path) == 0):
-        return False
-    if if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map) != False:
-        if_charge = if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)[2]
-        mVehicle = if_charge[0]
-        node_idx = if_charge[1]
-        vehicle_type = if_charge[2]
-        t_order = if_charge[3]
-        # 判断能否回到配送站
-        print("充电",mVehicle["charge_mile"],distance_matrix[path[node_idx]][0])
-        if mVehicle["charge_mile"] + distance_matrix[path[node_idx]][0] < vehicle_info[vehicle_type - 1].driving_range:
-            # print("不充电就直接回到配送站")
-            return False
-        else:
-            if mVehicle["charge_mile"]+t_order.charging_dist < vehicle_info[vehicle_type - 1].driving_range:
-                print("需要，且能去充电")
-                return True
-            else:
-                print("需要充电，但去不了",t_order.charging_dist)
-                return False
-    else:
-        print("返回值为 False")
-
-
-# 计算一段路径的运输距离
-def path_mileage(path, distance_matrix):
-    path_mile = 0
-    path_mile += distance_matrix[0][path[0]]
+# 计算一段路径的运输距离和运输时间
+def path_distance_time(path, distance_matrix, time_matrix):
+    path_distance = 0
+    path_time = 0
+    path_distance += distance_matrix[0][path[0]]
+    path_time += time_matrix[0][path[0]]
     for idx in range(len(path)-1):
-        path_mile += distance_matrix[path[idx]][path[idx+1]]
-    path_mile += distance_matrix[path[len(path)-1]][0]
-    return path_mile
+        path_distance += distance_matrix[path[idx]][path[idx+1]]
+        path_time += time_matrix[path[idx]][path[idx + 1]]
+    path_distance += distance_matrix[path[len(path)-1]][0]
+    path_time += time_matrix[path[len(path) - 1]][0]
+    return path_distance,path_time
+
+def path_nodes(path, orders):
+    weight = 0
+    volume = 0
+    for idx in path:
+        if idx <= 1000: #大于1000的id是充电站
+            weight += orders[idx-1].weight
+            volume += orders[idx-1].volume
+    return weight,volume
 
 
 def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
@@ -121,7 +109,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     random_idx = random.randint(0, len(candidate) - 1)
                 try_path = deepcopy(path)
                 try_path.append(candidate[random_idx].id)
-                if (if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix, vehicle_info, id_type_map)):
+                if (if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)):
                     path.append(candidate[random_idx].id)
                     cur_weight += candidate[random_idx].weight
                     cur_volume += candidate[random_idx].volume
@@ -136,12 +124,12 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     if (num_considered_order3 >= len(candidate)):
                         fail_flag = True
                         break
-            go_charge = if_go_to_charge(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)
+            go_charge = if_go_to_charge(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)
             # 看一眼去不去充电，两条原则：电量低于一定比例去充电，电量不够回去去充电
             if (go_charge):
                 try_path = deepcopy(path)
                 try_path.append(id_sorted_orders[path[-1] - 1].charging_binding)
-                can_go_charge = if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix, vehicle_info, id_type_map)
+                can_go_charge = if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)
                 if (can_go_charge):
                     # 电够就去
                     path.append(id_sorted_orders[path[-1] - 1].charging_binding)
@@ -152,24 +140,34 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
             if (fail_flag == True):
                 #找不到任何下一个合法点，挂掉，挂掉了只能回去，有可能回不去，交给if_path_legal判断
                 break
-        if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)):
+        if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)):
             used = used_try
             num_considered_order = num_considered_order_try
 
             #刘治修改
-            tp = if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info, id_type_map)[1]
+            tp = path_time_info(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)
             t_str = str(1000 + individual_id)
             tp.id = "DP0" + t_str[1:]
+            tp.vehicle_id = random_v_type+1
+            if random_v_type == 0:
+                tp.fixed_use_cost = 200
+            else:
+                tp.fixed_use_cost = 300
             tp.charge_cost = cost_charge
             tp.charge_cnt = cost_charge / 50
-            tp.calc_path_info(distance_matrix, time_matrix, vehicle_info)
-            tp.distance = path_mileage(path, distance_matrix)
+            # ？干嘛用的
+            tp.calc_path_info(distance_matrix, time_matrix, vehicle_info[random_v_type])
+            tp.distance = path_distance_time(path, distance_matrix,time_matrix)[0]
             #总成本=运输成本+等待成本+充电成本+固定成本
-            tp.trans_cost = tp.distance * 0.014
+            if random_v_type == 0:
+                tp.trans_cost = tp.distance * 0.012
+            else:
+                tp.trans_cost = tp.distance * 0.014
             tp.wait_cost = tp.wating_tm / 60 * 24
-            tp.total_cost = tp.trans_cost  + tp.wait_cost + tp.charge_cost + 300
-            print(tp.path)
-            individual.append(tp.to_list())
+            tp.total_cost = tp.trans_cost  + tp.wait_cost + tp.charge_cost + tp.fixed_use_cost
+            tp.weight = path_nodes(path,id_sorted_orders)[0]
+            tp.volume = path_nodes(path,id_sorted_orders)[1]
+            individual.append(tp)
             individual_id += 1
     return individual
 
