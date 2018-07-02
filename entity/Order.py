@@ -6,7 +6,9 @@ class Order(object):
                  fst_time, lst_time):
         self.id = id
         self.type = type
+        # x axis
         self.lng = lng
+        # y axis
         self.lat = lat
         if (weight == '-'):
             self.weight = -1

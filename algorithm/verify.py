@@ -99,7 +99,6 @@ def if_path_legal(orders, path, distance_matrix, time_matrix, vehicles, id_type_
                 # print("电量不够去充电")
                 return False
 
-    # tp = TransportPath(path,vehicles,0,0,0)
     tp.vehicle_id = vehicle_type
     if vehicle_type == 1:
         tp.fixed_use_cost = 200

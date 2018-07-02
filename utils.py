@@ -23,3 +23,9 @@ def verify_path_distance(path, distance_matrix, id_type_map, distance_limit):
         return False
     else:
         return True
+
+def search_node(nodes, node_id):
+    for n in nodes:
+        if n.id == node_id:
+            return n
+    return None
