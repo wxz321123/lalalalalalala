@@ -26,6 +26,6 @@ print("ploting")
 
 pathes = []
 for e in individual:
-    pathes.append(e[2])
+    pathes.append(e.path)
 
 plot_pathes(warehouse, orders, charging, pathes, id_type_map)

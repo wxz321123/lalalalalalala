@@ -1,8 +1,8 @@
 import load_data as ldd
+import output_data as opd
 import copy
 import algorithm.init as ai
 import random
-import pandas as pd
 
 #random.seed(time.time())
 random.seed(0)
@@ -21,13 +21,11 @@ for o in orders:
 
 print("generation initial population")
 init_population = []
-INIT_POPULATION_SIZE = 10
+INIT_POPULATION_SIZE = 1
 
 for i in range(INIT_POPULATION_SIZE):
     init_population.append(ai.random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging, vehicles, id_type_map, distance_matrix, time_matrix))
-
-    init_pop_pd = pd.DataFrame(init_population[i])
-    init_pop_pd.rename(columns={0:"trans_code ", 1:"vehicle_type",2:"dist_seq",3:'distribute_lea_tm',4:'distribute_arr_tm',5:'distance',6:'trans_cost',7:'charge_cost', 8:'wait_cost',9:"fixed_use_cost",10:'total_cost',11:"charge_cnt",12:"weight", 13:"volume"}, inplace=True)
-    ldd.excelAddSheet(init_pop_pd,'excel_output20180701.xlsx','sheet'+str(i+1))
+    init_pop_pd = opd.to_dataframe(init_population[i]) #转为dataframe
+    opd.excelAddSheet(init_pop_pd,'excel_output2018070309.xlsx','sheet'+str(i+1))
 
 print("done")
