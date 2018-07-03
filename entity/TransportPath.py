@@ -28,11 +28,11 @@ class TransportPath(object):
         self.distance = path_distance_time(self.path, distance_matrix, time_matrix)[0]
 
         t_str = str(1000 + individual_id)
+        self.id = "DP0" + t_str[1:]
         t_tm = path_time_info(id_sorted_orders, self.path, distance_matrix, time_matrix, vehicle_info[self.vehicle_id - 1],
                               id_type_map)
-        self.id = "DP0" + t_str[1:]
-        self.back_tm = t_tm[0]
-        self.start_tm = t_tm[1]
+        self.start_tm = t_tm[0]
+        self.back_tm = t_tm[1]
 
         self.waiting_tm = t_tm[2]
         self.charge_cnt = count_charge_cnt(self.path)
