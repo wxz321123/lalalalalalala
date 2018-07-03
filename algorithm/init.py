@@ -2,14 +2,13 @@ import random
 from copy import deepcopy
 from algorithm.verify import if_path_legal
 from algorithm.verify import if_go_to_charge
-from algorithm.verify import path_time_info
+from entity.TransportPath import TransportPath
 
 def polar_cmp(x, y):
     if (x.polar_angle != y.polar_angle):
         return x.polar_angle - y.polar_angle
     else:
         return x.polar_dist - y.polar_dist
-
 
 def filter_in_range(from_id, angle_sorted_orders, distance_matrix, distance_thres):
     order_id_ans = []
@@ -26,29 +25,6 @@ def first_unused_idx(used):
         if (used[i] == 0):
             return i
     return -1
-
-# 计算一段路径的运输距离和运输时间
-def path_distance_time(path, distance_matrix, time_matrix):
-    path_distance = 0
-    path_time = 0
-    path_distance += distance_matrix[0][path[0]]
-    path_time += time_matrix[0][path[0]]
-    for idx in range(len(path)-1):
-        path_distance += distance_matrix[path[idx]][path[idx+1]]
-        path_time += time_matrix[path[idx]][path[idx + 1]]
-    path_distance += distance_matrix[path[len(path)-1]][0]
-    path_time += time_matrix[path[len(path) - 1]][0]
-    return path_distance,path_time
-
-def path_nodes(path, orders):
-    weight = 0
-    volume = 0
-    for idx in path:
-        if idx <= 1000: #大于1000的id是充电站
-            weight += orders[idx-1].weight
-            volume += orders[idx-1].volume
-    return weight,volume
-
 
 def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
 
@@ -71,7 +47,6 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
         num_considered_order_try = num_considered_order
         random_v_type = random.randint(0, len(vehicle_info) - 1)
         path = []
-        cost_charge = 0  # 充电成本默认为0
         max_weight = vehicle_info[random_v_type].weight
         max_volume = vehicle_info[random_v_type].volume
         cur_weight = 0
@@ -133,10 +108,10 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                 if (can_go_charge):
                     # 电够就去
                     path.append(id_sorted_orders[path[-1] - 1].charging_binding)
-                    cost_charge += 50 #充电后充电成本为
                 else:
                     # 电不够，挂掉，挂掉了只能回去，有可能回不去，交给if_path_legal判断
                     break
+            # 这里的逻辑被我改过，为了修改充电原则
             if (fail_flag == True):
                 #找不到任何下一个合法点，挂掉，挂掉了只能回去，有可能回不去，交给if_path_legal判断
                 break
@@ -144,30 +119,10 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
             used = used_try
             num_considered_order = num_considered_order_try
 
-            #刘治修改
-            tp = path_time_info(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)
-            t_str = str(1000 + individual_id)
-            tp.id = "DP0" + t_str[1:]
-            tp.vehicle_id = random_v_type+1
-            if random_v_type == 0:
-                tp.fixed_use_cost = 200
-            else:
-                tp.fixed_use_cost = 300
-            tp.charge_cost = cost_charge
-            tp.charge_cnt = cost_charge / 50
-            # ？干嘛用的
-            tp.calc_path_info(distance_matrix, time_matrix, vehicle_info[random_v_type])
-            tp.distance = path_distance_time(path, distance_matrix,time_matrix)[0]
-            #总成本=运输成本+等待成本+充电成本+固定成本
-            if random_v_type == 0:
-                tp.trans_cost = tp.distance * 0.012
-            else:
-                tp.trans_cost = tp.distance * 0.014
-            tp.wait_cost = tp.wating_tm / 60 * 24
-            tp.total_cost = tp.trans_cost  + tp.wait_cost + tp.charge_cost + tp.fixed_use_cost
-            tp.weight = path_nodes(path,id_sorted_orders)[0]
-            tp.volume = path_nodes(path,id_sorted_orders)[1]
+            tp = TransportPath(path, random_v_type+1) # 实例化一个运输路径，接下来计算一些属性
+            tp = tp.calc_path_info(individual_id, distance_matrix, time_matrix, vehicle_info, id_sorted_orders, id_type_map)
             individual.append(tp)
             individual_id += 1
     return individual
+
 
