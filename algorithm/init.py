@@ -1,4 +1,5 @@
 import random
+import datetime
 from copy import deepcopy
 from algorithm.verify import if_path_legal
 from algorithm.verify import if_go_to_charge
@@ -27,6 +28,9 @@ def first_unused_idx(used):
     return -1
 
 def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
+
+    # if_path_legal(id_sorted_orders, [633,278,1056], datetime.datetime(2018, 6, 18, 8, 0, 0), distance_matrix, time_matrix,
+    #                                           vehicle_info[0], id_type_map)
 
     distance_thres = 10000
     num_vehicle_type = len(vehicle_info)
@@ -84,7 +88,9 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     random_idx = random.randint(0, len(candidate) - 1)
                 try_path = deepcopy(path)
                 try_path.append(candidate[random_idx].id)
-                if (if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)):
+                if (if_path_legal(id_sorted_orders, try_path,
+                                  datetime.datetime(2018, 6, 18, 8, 0, 0),
+                    distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)[0] == 0):
                     path.append(candidate[random_idx].id)
                     cur_weight += candidate[random_idx].weight
                     cur_volume += candidate[random_idx].volume
@@ -105,10 +111,10 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     break
                 try_path = deepcopy(path)
                 try_path.append(id_sorted_orders[path[-1] - 1].charging_binding)
-                can_go_charge = if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix,
+                can_go_charge = if_path_legal(id_sorted_orders, try_path, datetime.datetime(2018, 6, 18, 8, 0, 0), distance_matrix, time_matrix,
                                               vehicle_info[random_v_type], id_type_map)
                 # 补一个充电站，能行续一秒，不行挂掉
-                if (can_go_charge == False):
+                if (can_go_charge[0] != 0):
                     break
             thres_percent = random.random() / 3.0 + 0.2
             go_charge = if_go_to_charge(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map, thres_percent)
@@ -116,8 +122,8 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
             if (go_charge):
                 try_path = deepcopy(path)
                 try_path.append(id_sorted_orders[path[-1] - 1].charging_binding)
-                can_go_charge = if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)
-                if (can_go_charge):
+                can_go_charge = if_path_legal(id_sorted_orders, try_path, datetime.datetime(2018, 6, 18, 8, 0, 0), distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)[0]
+                if (can_go_charge == 0):
                     # 电够就去
                     path.append(id_sorted_orders[path[-1] - 1].charging_binding)
                 else:
@@ -127,12 +133,14 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
             elif (next_node_fail_flag == True):
                 break
 
-        if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)):
+        back_legal = if_path_legal(id_sorted_orders, path, datetime.datetime(2018, 6, 18, 8, 0, 0), distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)
+        if (back_legal[0] == 0):
             used = used_try
             num_considered_order = num_considered_order_try
 
-            if (path[0] == 132):
-                iiiiiiiiiiiii = 1
+            if (back_legal[1] != -1):
+                path.append(back_legal[1])
+
             tp = TransportPath(path, random_v_type+1) # 实例化一个运输路径，接下来计算一些属性
             tp = tp.calc_path_info(individual_id, distance_matrix, time_matrix, vehicle_info, id_sorted_orders, id_type_map)
             individual.append(tp)
