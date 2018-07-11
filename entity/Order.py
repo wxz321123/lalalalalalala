@@ -47,12 +47,5 @@ class Order(object):
             self.charging_dist = min_dist
 
     def set_distance_sorted_order(self, orders, distance_matrix):
-        def order_dist_cmp(x):
-            #return distance_matrix[self.id][x.id]
-            return x.lng
         sorted_orders = sorted(orders, key=lambda x: distance_matrix[self.id][x.id])
-        sorted_order_idxs = []
-
-        for i in range(len(sorted_orders)):
-            sorted_order_idxs.append(sorted_orders[i].id)
-        self.distance_sorted_orders = sorted_order_idxs
+        self.distance_sorted_orders = sorted_orders

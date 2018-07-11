@@ -20,14 +20,14 @@ distance_matrix, time_matrix = ldd.load_distance_time_info('../data/input_distan
 for o in orders:
     o.set_charging(charging, distance_matrix)
 
-print("generation initial population")
+print("generating initial population")
 
 individual = ai.random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging, vehicles, id_type_map, distance_matrix, time_matrix)
 
 print("ploting")
 
 pathes = []
-for e in individual:
-    pathes.append(e[2])
+for i in individual:
+    pathes.append(i.path)
 
 plot_pathes(warehouse, orders, charging, pathes, id_type_map)

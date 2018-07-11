@@ -77,7 +77,7 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
         while (num_considered_order2 < len(candidate)):
             num_considered_order3 = num_considered_order2
             used3 = deepcopy(used2)
-            fail_flag = False
+            next_node_fail_flag = False
             while (True):
                 random_idx = random.randint(0, len(candidate) - 1)
                 while (used3[random_idx] == 1):
@@ -97,11 +97,19 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                     used3[random_idx] = 1
                     num_considered_order3 += 1
                     if (num_considered_order3 >= len(candidate)):
-                        fail_flag = True
+                        next_node_fail_flag = True
                         break
-            if (fail_flag == True):
-                #找不到任何下一个合法点，挂掉，挂掉了只能回去，有可能回不去，交给if_path_legal判断
-                break
+            if (next_node_fail_flag == True):
+                # 不能续两秒
+                if (id_type_map[path[-1]] == 3):
+                    break
+                try_path = deepcopy(path)
+                try_path.append(id_sorted_orders[path[-1] - 1].charging_binding)
+                can_go_charge = if_path_legal(id_sorted_orders, try_path, distance_matrix, time_matrix,
+                                              vehicle_info[random_v_type], id_type_map)
+                # 补一个充电站，能行续一秒，不行挂掉
+                if (can_go_charge == False):
+                    break
             thres_percent = random.random() / 3.0 + 0.2
             go_charge = if_go_to_charge(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map, thres_percent)
             # 看一眼去不去充电，两条原则：电量低于一定比例去充电，电量不够回去去充电
@@ -115,10 +123,16 @@ def random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging
                 else:
                     # 电不够，挂掉，挂掉了只能回去，有可能回不去，交给if_path_legal判断
                     break
+            # 给你续一秒你又不去，挂掉
+            elif (next_node_fail_flag == True):
+                break
+
         if (if_path_legal(id_sorted_orders, path, distance_matrix, time_matrix, vehicle_info[random_v_type], id_type_map)):
             used = used_try
             num_considered_order = num_considered_order_try
 
+            if (path[0] == 132):
+                iiiiiiiiiiiii = 1
             tp = TransportPath(path, random_v_type+1) # 实例化一个运输路径，接下来计算一些属性
             tp = tp.calc_path_info(individual_id, distance_matrix, time_matrix, vehicle_info, id_sorted_orders, id_type_map)
             individual.append(tp)

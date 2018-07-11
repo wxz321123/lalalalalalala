@@ -15,9 +15,13 @@ angle_sorted_orders = sorted(orders, key = lambda x: x.polar_angle)
 vehicles = ldd.load_vehicle_info('data/input_vehicle_type.csv')
 distance_matrix, time_matrix = ldd.load_distance_time_info('data/input_distance-time.csv')
 
+idx = 0
+orders_cp = copy.deepcopy(orders)
 for o in orders:
+    print(idx)
     o.set_charging(charging, distance_matrix)
-    #o.set_distance_sorted_order(copy.deepcopy(orders), distance_matrix)
+    #o.set_distance_sorted_order(orders_cp, distance_matrix)
+    idx += 1
 
 print("generation initial population")
 init_population = []
