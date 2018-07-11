@@ -22,7 +22,7 @@ for o in orders:
 
 print("generating initial population")
 
-individual = ai.random_individual(warehouse, id_sorted_orders, angle_sorted_orders, charging, vehicles, id_type_map, distance_matrix, time_matrix)
+individual = ai.better_init_individual(warehouse, id_sorted_orders, charging, vehicles, id_type_map, distance_matrix, time_matrix)
 
 print("ploting")
 

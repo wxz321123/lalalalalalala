@@ -64,7 +64,7 @@ def path_time_info(orders, path, distance_matrix, time_matrix, vehicle_info, id_
                             mVehicle["current_time"] = mVehicle["current_time"] + datetime.timedelta(minutes=trans_time+30) #30分钟是前一个客户服务时间
                         # datetime.timedelta(hours=10,minutes=30)  #时间运算/时间加减
                         # print(mVehicle["current_time"])
-                        if mVehicle["current_time"] < datetime.datetime(2018, 6, 18,int(t_order.lst_time.split(":")[0]),int(t_order.lst_time.split(":")[1]),0):
+                        if mVehicle["current_time"] <= datetime.datetime(2018, 6, 18,int(t_order.lst_time.split(":")[0]),int(t_order.lst_time.split(":")[1]),0):
                             # print("满足时间窗上限",t_order.fst_time,t_order.lst_time)
                             if mVehicle["current_time"] < datetime.datetime(2018, 6, 18,int(t_order.fst_time.split(":")[0]),int(t_order.fst_time.split(":")[1]),0):
                                 if node_idx != 0:

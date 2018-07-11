@@ -29,7 +29,7 @@ def if_power_legal(orders, path, distance_matrix, vehicle_info, id_type_map):
         if (node_idx == 0):
             power += distance_matrix[0][path[node_idx]]
         else:
-            power += distance_matrix[path[node_idx] - 1][path[node_idx]]
+            power += distance_matrix[path[node_idx - 1]][path[node_idx]]
         if power > vehicle_info.driving_range:
             return False, -1
         if (id_type_map[path[node_idx]] == 3):
@@ -85,17 +85,17 @@ def if_path_legal(orders, path, start_time, distance_matrix, time_matrix, vehicl
     p, charge_idx = if_power_legal(orders, path, distance_matrix, vehicle_info, id_type_map)
     t = if_time_legal(orders, start_time, path, time_matrix, id_type_map)
 
+    reason_dic = {
+        'w': w,
+        'v': v,
+        'p': p,
+        't': t
+    }
+
     if (w and v and p and t):
-        return 0, charge_idx
+        return  True, charge_idx, reason_dic
     else:
-        if (w == False):
-            return 1, charge_idx
-        if (v == False):
-            return 2, charge_idx
-        if (p == False):
-            return 3, charge_idx
-        if (t == False):
-            return 4, charge_idx
+        return False, charge_idx, reason_dic
 
 
 # 判断路径是否合规
