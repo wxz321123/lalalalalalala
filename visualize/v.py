@@ -75,3 +75,5 @@ def plot_pathes(warehouse, orders, charging, pathes, id_type_map):
         plt.plot(path_x, path_y, linewidth=1)
 
     plt.show()
+
+    #<class 'list'>: [770, 137, 196, 872, 377, 326, 152, 556, 1050]
