@@ -199,11 +199,11 @@ def can_go_to_charge(path, charging_distance, distance_matrix, vehicle_info, id_
 
 def decide_v_type(id_sorted_orders, path, vehicle_info, distance_matrix, time_matrix, id_type_map):
     b = if_path_legal(id_sorted_orders, path, datetime.datetime(2018, 6, 18, 8, 0, 0), distance_matrix, time_matrix,
-                  vehicle_info[0], id_type_map)[0]
-    if (b):
-        return 1
+                  vehicle_info[0], id_type_map)
+    if (b[0] == True and b[1] == -1):
+        return 0
     else:
-        return 2
+        return 1
 
 
 def better_init_individual(warehouse, id_sorted_orders, chargings, vehicle_info, id_type_map, distance_matrix, time_matrix):
@@ -226,6 +226,8 @@ def better_init_individual(warehouse, id_sorted_orders, chargings, vehicle_info,
         path.append(fo.id)
         used[fo.id] = 1
         num_considered_order += 1
+        if path[0] == 456:
+            iiiii=0
 
         while(True):
             used_try = deepcopy(used)
@@ -270,12 +272,29 @@ def better_init_individual(warehouse, id_sorted_orders, chargings, vehicle_info,
             if (fail_flag == True):
                 break
 
-        pathes.append(path)
+        if (path[0] == 456):
+            iiiii=0
+        b = if_path_legal(id_sorted_orders, path,
+                          datetime.datetime(2018, 6, 18, 8, 0, 0),
+                          distance_matrix, time_matrix,
+                          vehicle_info[v_type], id_type_map)
+        if b[0] == True:
+            if b[1] != -1:
+                path.append(b[1])
+            pathes.append(path)
+
 
     ans = []
     for idx, path in enumerate(pathes):
         v_type = decide_v_type(id_sorted_orders, path, vehicle_info, distance_matrix, time_matrix, id_type_map)
-        tp = TransportPath(path, v_type)  # 实例化一个运输路径，接下来计算一些属性
-        tp = tp.calc_path_info(idx, distance_matrix, time_matrix, vehicle_info, id_sorted_orders, id_type_map)
+        tp = TransportPath(path, v_type + 1)  # 实例化一个运输路径，接下来计算一些属性
+        tp = tp.calc_path_info(idx + 1, distance_matrix, time_matrix, vehicle_info, id_sorted_orders, id_type_map)
+        b = if_path_legal(id_sorted_orders, path,
+                      datetime.datetime(2018, 6, 18, 8, 0, 0),
+                      distance_matrix, time_matrix,
+                      vehicle_info[v_type], id_type_map)
+        print(idx)
+        if b[0] == False or b[1] != -1:
+            raise Exception
         ans.append(tp)
     return ans

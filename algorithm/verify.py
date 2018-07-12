@@ -75,22 +75,26 @@ def if_time_legal(orders, start_time, path, time_matrix, id_type_map):
 
 # orders is sorted by id
 def if_path_legal(orders, path, start_time, distance_matrix, time_matrix, vehicle_info, id_type_map):
+    reason_dic = {
+        'w': False,
+        'v': False,
+        'p': False,
+        't': False
+    }
     if (len(path) == 0):
-        return False, -1
+        return False, -1, reason_dic
     for node in path:
         if id_type_map[node] == 1:
-            return False, -1
+            return False, -1, reason_dic
     w = if_weight_legal(orders, path, vehicle_info, id_type_map)
     v = if_volume_legal(orders, path, vehicle_info, id_type_map)
     p, charge_idx = if_power_legal(orders, path, distance_matrix, vehicle_info, id_type_map)
     t = if_time_legal(orders, start_time, path, time_matrix, id_type_map)
 
-    reason_dic = {
-        'w': w,
-        'v': v,
-        'p': p,
-        't': t
-    }
+    reason_dic['w'] = w
+    reason_dic['v'] = v
+    reason_dic['p'] = p
+    reason_dic['t'] = t
 
     if (w and v and p and t):
         return  True, charge_idx, reason_dic
