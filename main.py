@@ -1,7 +1,7 @@
 import load_data as ldd
 import output_data as opd
 import copy
-import algorithm.init as ai
+import algorithm.init.nearest_first_individual as ai
 import random
 
 #random.seed(time.time())

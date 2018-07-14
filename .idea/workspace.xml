@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93bf3642-f601-4301-bd87-b18e0ea00e9e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/excel_output2018070309.xlsx" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algorithm/init/nearest_first_individual.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algorithm/init/random_individual.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algorithm/optimize/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algorithm/optimize/path_exchange.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algorithm/utils.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/init.py" afterPath="$PROJECT_DIR$/algorithm/init.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/visualize/v.py" afterPath="$PROJECT_DIR$/visualize/v.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithm/verify.py" afterPath="$PROJECT_DIR$/algorithm/verify.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/visualize_induvidual.py" afterPath="$PROJECT_DIR$/example/visualize_induvidual.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/playground.py" afterPath="$PROJECT_DIR$/playground.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/algorithm/optimize.py" afterPath="$PROJECT_DIR$/algorithm/init/__init__.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,12 +24,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/JDGenetic$visualize_induvidual.coverage" NAME="visualize_induvidual Coverage Results" MODIFIED="1531307721470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example" />
+    <SUITE FILE_PATH="coverage/JDGenetic$visualize_induvidual.coverage" NAME="visualize_induvidual Coverage Results" MODIFIED="1531550134873" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example" />
     <SUITE FILE_PATH="coverage/JDGenetic$v.coverage" NAME="v Coverage Results" MODIFIED="1530525461714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualize" />
-    <SUITE FILE_PATH="coverage/JDGenetic$main.coverage" NAME="main Coverage Results" MODIFIED="1531365232785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JDGenetic$main.coverage" NAME="main Coverage Results" MODIFIED="1531549953118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JDGenetic$d.coverage" NAME="d Coverage Results" MODIFIED="1530529400308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JDGenetic$test.coverage" NAME="test Coverage Results" MODIFIED="1530620709621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/JDGenetic$path_exchange.coverage" NAME="path_exchange Coverage Results" MODIFIED="1531577643563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm/optimize" />
     <SUITE FILE_PATH="coverage/JDGenetic$visualize_single_path.coverage" NAME="visualize_single_path Coverage Results" MODIFIED="1530529579644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example" />
+    <SUITE FILE_PATH="coverage/JDGenetic$playground.coverage" NAME="playground Coverage Results" MODIFIED="1531564296765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/JDGenetic$init.coverage" NAME="init Coverage Results" MODIFIED="1531310462691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/algorithm" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -33,43 +43,21 @@
       <file leaf-file-name="Order.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entity/Order.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="45" column="20" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="33" />
+            <state relative-caret-position="525">
+              <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="visualize_induvidual.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/visualize_induvidual.py">
+      <file leaf-file-name="path_exchange.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/algorithm/optimize/path_exchange.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+            <state relative-caret-position="-911">
+              <caret line="83" column="41" lean-forward="true" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
               <folding>
-                <element signature="e#53#76#0" expanded="true" />
+                <element signature="e#0#46#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="output_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/output_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="7" column="36" lean-forward="false" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -77,51 +65,71 @@
       <file leaf-file-name="TransportPath.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entity/TransportPath.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="31" column="23" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state relative-caret-position="457">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="init.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/algorithm/init.py">
+      <file leaf-file-name="random_individual.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithm/init/random_individual.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="267" column="30" lean-forward="false" selection-start-line="267" selection-start-column="30" selection-end-line="267" selection-end-column="30" />
+            <state relative-caret-position="3500">
+              <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="playground.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/playground.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="visualize_single_path.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/visualize_single_path.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nearest_first_individual.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/algorithm/init/nearest_first_individual.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="873">
+              <caret line="104" column="25" lean-forward="false" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="25" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="verify.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/algorithm/verify.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="v.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visualize/v.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="78" column="67" lean-forward="false" selection-start-line="78" selection-start-column="67" selection-end-line="78" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calculate.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/algorithm/calculate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="66" column="54" lean-forward="false" selection-start-line="66" selection-start-column="54" selection-end-line="66" selection-end-column="54" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -140,6 +148,7 @@
       <find>sort</find>
       <find>filter_in_range</find>
       <find>if_path_legal</find>
+      <find>legal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,16 +167,22 @@
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/d.py" />
         <option value="$PROJECT_DIR$/example/visualize_single_path.py" />
-        <option value="$PROJECT_DIR$/playground.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/algorithm/optimize.py" />
         <option value="$PROJECT_DIR$/entity/Order.py" />
         <option value="$PROJECT_DIR$/algorithm/calculate.py" />
-        <option value="$PROJECT_DIR$/example/visualize_induvidual.py" />
-        <option value="$PROJECT_DIR$/algorithm/verify.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/visualize/v.py" />
         <option value="$PROJECT_DIR$/algorithm/init.py" />
+        <option value="$PROJECT_DIR$/algorithm/optimize.py" />
+        <option value="$PROJECT_DIR$/algorithm/init/random_individual.py" />
+        <option value="$PROJECT_DIR$/algorithm/verify.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/algorithm/init/__init__.py" />
+        <option value="$PROJECT_DIR$/example/visualize_induvidual.py" />
+        <option value="$PROJECT_DIR$/algorithm/optimize/__init__.py" />
+        <option value="$PROJECT_DIR$/algorithm/utils.py" />
+        <option value="$PROJECT_DIR$/algorithm/init/nearest_first_individual.py" />
+        <option value="$PROJECT_DIR$/playground.py" />
+        <option value="$PROJECT_DIR$/algorithm/optimize/path_exchange.py" />
       </list>
     </option>
   </component>
@@ -280,6 +295,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JDGenetic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JDGenetic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="optimize" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JDGenetic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JDGenetic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="init" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -303,43 +354,7 @@
       <recent name="D:\pyWorkspace\JDGenetic\algorithm" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="JDGenetic" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="visualize_single_path" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/example" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="JDGenetic" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/example/visualize_single_path.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.path_exchange">
     <configuration default="false" name="visualize_induvidual" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -390,6 +405,42 @@
       <module name="JDGenetic" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algorithm/init.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="playground" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="JDGenetic" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/playground.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="path_exchange" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/algorithm/optimize" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="JDGenetic" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/algorithm/optimize/path_exchange.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -612,19 +663,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.visualize_single_path" />
-      <item index="2" class="java.lang.String" itemvalue="Python.visualize_induvidual" />
-      <item index="3" class="java.lang.String" itemvalue="Python.main" />
-      <item index="4" class="java.lang.String" itemvalue="Python.init" />
+      <item index="0" class="java.lang.String" itemvalue="Python.visualize_induvidual" />
+      <item index="1" class="java.lang.String" itemvalue="Python.main" />
+      <item index="2" class="java.lang.String" itemvalue="Python.init" />
+      <item index="3" class="java.lang.String" itemvalue="Python.playground" />
+      <item index="4" class="java.lang.String" itemvalue="Python.path_exchange" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.init" />
+        <item index="0" class="java.lang.String" itemvalue="Python.path_exchange" />
+        <item index="1" class="java.lang.String" itemvalue="Python.playground" />
         <item index="2" class="java.lang.String" itemvalue="Python.visualize_induvidual" />
-        <item index="3" class="java.lang.String" itemvalue="Python.test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.visualize_single_path" />
+        <item index="3" class="java.lang.String" itemvalue="Python.main" />
+        <item index="4" class="java.lang.String" itemvalue="Python.init" />
       </list>
     </recent_temporary>
   </component>
@@ -643,21 +694,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33861834" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26613817" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26613817" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27682403" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28778136" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41789356" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41789356" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -725,6 +776,21 @@
           <line>77</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/algorithm/optimize/path_exchange.py</url>
+          <line>102</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/algorithm/optimize/path_exchange.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/algorithm/optimize/path_exchange.py</url>
+          <line>93</line>
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -736,7 +802,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="132" />
+      <option name="time" value="143" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -747,74 +813,11 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/load_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/input_distance-time.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/input_node.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="85" column="12" lean-forward="false" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithm/init.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/Vehicle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/Order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/load_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -834,9 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -866,9 +866,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -883,9 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -977,38 +972,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playground.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python35/Lib/random.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="217" column="0" lean-forward="false" selection-start-line="217" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/visualize_single_path.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithm/optimize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1026,29 +993,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/entity/Order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="45" column="20" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/visualize_induvidual.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-          <folding>
-            <element signature="e#53#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/output_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="7" column="36" lean-forward="false" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,7 +1004,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,38 +1011,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="69" lean-forward="false" selection-start-line="0" selection-start-column="69" selection-end-line="0" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithm/calculate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="66" column="54" lean-forward="false" selection-start-line="66" selection-start-column="54" selection-end-line="66" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/visualize/v.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
+        <state relative-caret-position="1925">
           <caret line="78" column="67" lean-forward="false" selection-start-line="78" selection-start-column="67" selection-end-line="78" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity/TransportPath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="31" column="23" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/algorithm/verify.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1104,26 +1026,150 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/calculate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="801">
+          <caret line="66" column="54" lean-forward="false" selection-start-line="66" selection-start-column="54" selection-end-line="66" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/optimize.py" />
+    <entry file="file://$PROJECT_DIR$/algorithm/init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/init/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/optimize/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/visualize_induvidual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#53#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/visualize_single_path.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algorithm/init.py">
+    <entry file="file://$PROJECT_DIR$/algorithm/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="267" column="30" lean-forward="false" selection-start-line="267" selection-start-column="30" selection-end-line="267" selection-end-column="30" />
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entity/Order.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playground.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/init/random_individual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3500">
+          <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python35/Lib/site-packages/pandas/io/parsers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9065">
+          <caret line="1389" column="0" lean-forward="false" selection-start-line="1389" selection-start-column="0" selection-end-line="1389" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python35/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/verify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="76" column="4" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/init/nearest_first_individual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="873">
+          <caret line="104" column="25" lean-forward="false" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="25" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/entity/TransportPath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        <state relative-caret-position="457">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/algorithm/optimize/path_exchange.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-911">
+          <caret line="83" column="41" lean-forward="true" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>

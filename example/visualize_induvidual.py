@@ -2,7 +2,7 @@
 # 当可视化所有路径时，去往第一个点和从最后一个点返回的线没有被画
 
 import load_data as ldd
-import algorithm.init as ai
+import algorithm.init.nearest_first_individual as ai
 import random
 from visualize.v import plot_pathes
 
